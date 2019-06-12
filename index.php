@@ -1,3 +1,13 @@
+<?php 
+    require_once('Models/Todo.php');
+    require_once('function.php');
+
+    $todo = new Todo();
+
+    $tasks = $todo->all();
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,9 +54,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($tasks as $task): ?>
                     <tr>
-                        <td>create new website</td>
-                        <td>2019/08/21</td>
+                        <td><?php echo h($task['name']); ?></td>
+                        <td><?php echo date('Y年m月d日',strtotime(h($task['due_date']))); ?></td>
                         <td>
                             <a class="text-success" href="edit.php">EDIT</a>
                         </td>
@@ -54,16 +65,7 @@
                             <a class="text-danger" href="delete.php">DELETE</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>go to club</td>
-                        <td>2019/10/21</td>
-                        <td>
-                            <a class="text-success" href="edit.php">EDIT</a>
-                        </td>
-                        <td>
-                            <a class="text-danger" href="delete.php">DELETE</a>
-                        </td>
-                    </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>  
         </section>
