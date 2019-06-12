@@ -28,5 +28,19 @@ class Todo
         $stmt->execute([$name]);
     }
 
+    public function get($id)
+    {
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE id = ?');
+        $stmt->execute([$id]);
+        $task = $stmt->fetch();
+
+        return $task;
+    }
+
+    public function update($name,$id)
+    {
+        $stmt = $this->db_manager->dbh->prepare('UPDATE ' . $this->table . ' SET name = ? WHERE id = ?');
+        $stmt->execute([$name,$id]);
+    }
 
 }
