@@ -43,4 +43,10 @@ class Todo
         $stmt->execute([$name,$id]);
     }
 
+    public function delete($id)
+    {
+        $stmt = $this->db_manager->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = ?');
+        $stmt->execute([$id]);
+    }
+
 }
